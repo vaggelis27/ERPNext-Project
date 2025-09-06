@@ -1,0 +1,60 @@
+:root {
+  --bg: #0b0c10;
+  --panel: #16181d;
+  --text: #e6e6e6;
+  --muted: #9aa0a6;
+  --line: #222;
+}
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+.navbar {
+  background: #0e1116 !important;
+}
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+}
+.text-muted {
+  color: var(--muted) !important;
+}
+.form-control {
+  background: #0e1116;
+  color: var(--text);
+  border: 1px solid #2a2f3a;
+}
+.form-control::placeholder {
+  color: var(--muted);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th,
+td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #20232a;
+}
+table thead th {
+  cursor: pointer;
+  user-select: none;
+}
+.table-wrap {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+tbody tr:nth-child(odd) td {
+  background: #14161a;
+}
+tbody tr:hover td {
+  background: #1b1f27;
+}
+
+.object-cover {
+  object-fit: cover;
+}

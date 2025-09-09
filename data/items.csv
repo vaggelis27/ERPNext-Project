@@ -1,3 +1,3 @@
-Item Code,Item Name,Item Group,Stock UOM,Standard Rate
-MILK_PAST,MILK_PAST,Products,Litre,0
-MILK_RAW,MILK_RAW,Raw Material,Litre,0.35
+Item Code,Item Name,Item Group,Default Unit of Measure,Has Batch No
+MILK_RAW,Raw Milk (Unpasteurized),Raw Material,Litre,1
+MILK_PAST,Milk (Pasteurized),Products,Litre,1

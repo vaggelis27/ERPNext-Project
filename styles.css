@@ -1,60 +1,45 @@
 :root {
-  --bg: #0b0c10;
-  --panel: #16181d;
-  --text: #e6e6e6;
-  --muted: #9aa0a6;
-  --line: #222;
+  --radius: 1rem;
 }
-html,
-body {
-  background: var(--bg);
-  color: var(--text);
+
+.bg-hero {
+  background: linear-gradient(180deg, #0d6efd 0%, #0a58ca 100%);
+  color: #fff;
 }
-.navbar {
-  background: #0e1116 !important;
-}
+
 .card {
-  background: var(--panel);
-  border: 1px solid var(--line);
+  border-radius: var(--radius);
 }
-.text-muted {
-  color: var(--muted) !important;
-}
-.form-control {
-  background: #0e1116;
-  color: var(--text);
-  border: 1px solid #2a2f3a;
-}
-.form-control::placeholder {
-  color: var(--muted);
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-th,
-td {
-  padding: 10px 12px;
-  border-bottom: 1px solid #20232a;
-}
-table thead th {
-  cursor: pointer;
-  user-select: none;
-}
-.table-wrap {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  overflow: hidden;
-}
-tbody tr:nth-child(odd) td {
-  background: #14161a;
-}
-tbody tr:hover td {
-  background: #1b1f27;
-}
-
-.object-cover {
+.thumb img {
   object-fit: cover;
 }
+
+.footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.flowchart .node {
+  fill: #ffffff;
+  stroke: #0d6efd;
+  stroke-width: 2;
+}
+.flowchart .node-text {
+  font-size: 14px;
+  font-weight: 600;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  fill: #0d6efd;
+}
+.flowchart .arrow {
+  stroke: #0d6efd;
+  stroke-width: 2.5;
+}
+
+.table thead th {
+  white-space: nowrap;
+}
+#searchInput {
+  max-width: 520px;
+}
+
+/* Gallery */

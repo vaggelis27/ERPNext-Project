@@ -1,145 +1,159 @@
-// ----- Datasets -----
-const DATASETS = {
-  items: {
-    title: "Items",
-    file: "data/items.csv",
-    columns: [
-      "Item Code",
-      "Item Name",
-      "Item Group",
-      "Stock UOM",
-      "Standard Rate",
-    ],
-  },
-  customers: {
-    title: "Customers",
-    file: "data/customers.csv",
-    columns: [
-      "Customer Name",
-      "Customer Group",
-      "Territory",
-      "Default Currency",
-    ],
-  },
-};
+// ERPNext Milk Demo — CSV loading & rendering
+// Dependencies: PapaParse (included in <head>), Bootstrap bundle
+// Data files: data/suppliers.csv, data/items.csv, data/crm.csv
 
-const $ = (s) => document.querySelector(s);
-let allRows = [];
-let sortState = { key: null, asc: true };
-
-// CSV loader //
-function csvToArray(file) {
-  return new Promise((resolve, reject) => {
-    Papa.parse(file, {
-      download: true,
-      header: true,
-      skipEmptyLines: true,
-      complete: (res) => resolve(res.data),
-      error: reject,
+// CSV loader with BOM handling and fallback for delimiter (;)
+async function loadCSV(url) {
+  const parse = (opts = {}) =>
+    new Promise((resolve, reject) => {
+      Papa.parse(url, {
+        download: true,
+        header: true,
+        skipEmptyLines: true,
+        transformHeader: (h) => (h || "").replace(/^\uFEFF/, "").trim(),
+        ...opts,
+        complete: (r) => resolve(r.data || []),
+        error: (err) => reject(err),
+      });
     });
-  });
-}
-function esc(v) {
-  if (v == null) return "";
-  return String(v)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;");
-}
 
-// Render table with search & sort //
-function renderTable(title, rows, columns) {
-  $("#table-tools").classList.remove("d-none");
-  $("#search").value = "";
-  sortState = { key: null, asc: true };
-  allRows = rows.slice();
+  const withTimeout = (p) =>
+    Promise.race([
+      p,
+      new Promise((_, rej) =>
+        setTimeout(() => rej(new Error(`Timeout loading ${url}`)), 15000)
+      ),
+    ]);
 
-  const thead = `<thead><tr>${columns
-    .map((c) => `<th data-key="${c}">${c}</th>`)
-    .join("")}</tr></thead>`;
-  const tbody = buildTbody(allRows, columns);
-  $("#view").innerHTML = `
-    <div class="table-wrap">
-      <div class="p-3 border-bottom border-secondary d-flex justify-content-between align-items-center">
-        <h2 class="h5 m-0">${title}</h2>
-        <span class="badge text-bg-secondary">${rows.length} rows</span>
-      </div>
-      <div class="table-responsive">
-        <table class="table m-0">${thead}${tbody}</table>
-      </div>
-    </div>`;
-  $("#row-count").textContent = `${rows.length} rows`;
-
-  document.querySelectorAll("th[data-key]").forEach((th) => {
-    th.onclick = () => sortBy(th.getAttribute("data-key"), columns);
-  });
-  $("#search").oninput = () => filter($("#search").value.trim(), columns);
-}
-
-function buildTbody(rows, columns) {
-  const body = rows
-    .map(
-      (r) => `<tr>${columns.map((c) => `<td>${esc(r[c])}</td>`).join("")}</tr>`
-    )
-    .join("");
-  return `<tbody>${body}</tbody>`;
-}
-
-function filter(q, columns) {
-  const query = q.toLowerCase();
-  const filtered = !query
-    ? allRows
-    : allRows.filter((r) =>
-        columns.some((c) =>
-          String(r[c] ?? "")
-            .toLowerCase()
-            .includes(query)
-        )
-      );
-  $("#row-count").textContent = `${filtered.length} / ${allRows.length} rows`;
-  const tbody = buildTbody(filtered, columns);
-  const table = document.querySelector("#view table");
-  table.querySelector("tbody").outerHTML = tbody;
-}
-
-function sortBy(key, columns) {
-  const asc = sortState.key === key ? !sortState.asc : true;
-  sortState = { key, asc };
-  allRows.sort((a, b) => {
-    const va = (a[key] ?? "").toString().toLowerCase();
-    const vb = (b[key] ?? "").toString().toLowerCase();
-    if (!isNaN(Number(va)) && !isNaN(Number(vb)))
-      return asc ? Number(va) - Number(vb) : Number(vb) - Number(va);
-    return asc ? va.localeCompare(vb) : vb.localeCompare(va);
-  });
-  filter($("#search").value.trim(), columns);
-}
-
-// Router-like navigation//
-async function show(key) {
-  const cfg = DATASETS[key];
-  try {
-    const rows = await csvToArray(cfg.file);
-    const normalized = rows.map((r) =>
-      Object.fromEntries(cfg.columns.map((c) => [c, r[c] ?? ""]))
+  // First attempt: auto-detect delimiter
+  let rows = await withTimeout(parse());
+  if (!rows || rows.length === 0) {
+    console.warn(
+      `[CSV] No rows detected for ${url}. Retrying with ';' delimiter…`
     );
-    renderTable(cfg.title, normalized, cfg.columns);
-  } catch (e) {
-    $("#table-tools").classList.add("d-none");
-    $("#view").innerHTML = `
-      <div class="alert alert-warning">
-        File <code>${cfg.file}</code> not found. Place your CSV under <code>/data</code> and refresh.
-      </div>`;
+    rows = await withTimeout(parse({ delimiter: ";" }));
   }
+  return rows;
 }
 
-function route() {
-  const hash = (location.hash || "#home").replace("#", "");
-  if (hash === "items") return show("items");
-  if (hash === "customers") return show("customers");
-  // default = home only (hero)
-  $("#table-tools").classList.add("d-none");
+// Render a table dynamically based on CSV rows
+function renderTable(tableEl, rows) {
+  if (!tableEl) return;
+  const thead = tableEl.querySelector("thead");
+  const tbody = tableEl.querySelector("tbody");
+  thead.innerHTML = "";
+  tbody.innerHTML = "";
+
+  if (!rows || rows.length === 0) {
+    thead.innerHTML = "<tr><th>—</th></tr>";
+    tbody.innerHTML = "<tr><td>No data available.</td></tr>";
+    return;
+  }
+
+  const headers = Object.keys(rows[0]);
+  const trHead = document.createElement("tr");
+  headers.forEach((h) => {
+    const th = document.createElement("th");
+    th.textContent = h;
+    trHead.appendChild(th);
+  });
+  thead.appendChild(trHead);
+
+  const frag = document.createDocumentFragment();
+  rows.forEach((r) => {
+    const tr = document.createElement("tr");
+    headers.forEach((h) => {
+      const td = document.createElement("td");
+      const val = r[h];
+      td.textContent = val === undefined || val === null ? "" : String(val);
+      tr.appendChild(td);
+    });
+    frag.appendChild(tr);
+  });
+  tbody.appendChild(frag);
 }
 
-window.addEventListener("hashchange", route);
-window.addEventListener("DOMContentLoaded", route);
+// Setup search input (global filter on the active table)
+function setupSearch(inputEl, resetBtn) {
+  inputEl.addEventListener("input", () => {
+    const q = inputEl.value.trim().toLowerCase();
+    filterVisibleTable(q);
+  });
+  resetBtn.addEventListener("click", () => {
+    inputEl.value = "";
+    filterVisibleTable("");
+  });
+}
+
+// Apply filtering to the active tab's table
+function filterVisibleTable(q) {
+  const activePane = document.querySelector(".tab-pane.active.show");
+  if (!activePane) return;
+  activePane.querySelectorAll("tbody tr").forEach((row) => {
+    const text = row.innerText.toLowerCase();
+    row.style.display = q && !text.includes(q) ? "none" : "";
+  });
+}
+
+// -----------------------------------------------------
+// Init
+// -----------------------------------------------------
+(async function init() {
+  try {
+    if (typeof Papa === "undefined") {
+      throw new Error("PapaParse not loaded. Check the <script> in <head>.");
+    }
+
+    const paths = {
+      suppliers: "data/suppliers.csv",
+      items: "data/items.csv",
+      crm: "data/crm.csv",
+    };
+
+    const [suppliers, items, crm] = await Promise.all([
+      loadCSV(paths.suppliers).catch((e) => {
+        console.error("Suppliers CSV error:", e);
+        return [];
+      }),
+      loadCSV(paths.items).catch((e) => {
+        console.error("Items CSV error:", e);
+        return [];
+      }),
+      loadCSV(paths.crm).catch((e) => {
+        console.error("CRM CSV error:", e);
+        return [];
+      }),
+    ]);
+
+    console.log(`[OK] Suppliers: ${suppliers.length} rows`);
+    console.log(`[OK] Items: ${items.length} rows`);
+    console.log(`[OK] CRM: ${crm.length} rows`);
+
+    renderTable(document.getElementById("suppliersTable"), suppliers);
+    renderTable(document.getElementById("itemsTable"), items);
+    renderTable(document.getElementById("crmTable"), crm);
+
+    setupSearch(
+      document.getElementById("searchInput"),
+      document.getElementById("resetBtn")
+    );
+
+    // Re-apply filter when switching tabs
+    document
+      .querySelectorAll('button[data-bs-toggle="pill"]')
+      .forEach((btn) => {
+        btn.addEventListener("shown.bs.tab", () => {
+          const q = document
+            .getElementById("searchInput")
+            .value.trim()
+            .toLowerCase();
+          filterVisibleTable(q);
+        });
+      });
+  } catch (err) {
+    console.error("[Init Error]", err);
+    alert(
+      "CSV loading failed.\nMake sure you run the site via HTTP (Live Server or `python3 -m http.server`) and verify the files:\n- data/suppliers.csv\n- data/items.csv\n- data/crm.csv"
+    );
+  }
+})();

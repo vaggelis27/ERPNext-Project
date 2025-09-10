@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="el">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -41,13 +41,13 @@
         <div id="nav" class="collapse navbar-collapse">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#overview">Επισκόπηση</a>
+              <a class="nav-link" href="#overview">Overview</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#gallery">Εικόνες</a>
+              <a class="nav-link" href="#gallery">Screenshots</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#data">CSV Δεδομένα</a>
+              <a class="nav-link" href="#data">CSV Data</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#crm">CRM Flow</a>
@@ -66,24 +66,24 @@
               Milk Cycle – Phase 1 Completed
             </h1>
             <p class="lead mb-4">
-              Από το <strong>Setup & Data Import</strong> μέχρι
-              <strong>Stock/Batches</strong> και
+              From <strong>Setup & Data Import</strong> to
+              <strong>Stock/Batches</strong> and
               <strong>CRM (Lead → Opportunity → Quotation → Customer)</strong>.
-              Demo με εικόνες και ζωντανά CSV.
+              Live demo with screenshots and CSV data.
             </p>
             <a href="#data" class="btn btn-primary btn-lg">
-              <i class="bi bi-table"></i> Δες τα Δεδομένα
+              <i class="bi bi-table"></i> View Data
             </a>
             <a href="#gallery" class="btn btn-outline-light btn-lg ms-2">
-              <i class="bi bi-images"></i> Δες το UI
+              <i class="bi bi-images"></i> View UI
             </a>
           </div>
           <div class="col-lg-5">
-            <!-- Απλό flowchart σε SVG -->
+            <!-- Simple flowchart (SVG) -->
             <div class="card shadow-sm">
               <div class="card-body">
                 <h5 class="card-title mb-3">
-                  <i class="bi bi-flowchart"></i> Ροή Phase 1
+                  <i class="bi bi-flowchart"></i> Phase 1 Flow
                 </h5>
                 <div class="flowchart text-center">
                   <svg viewBox="0 0 640 180" class="w-100">
@@ -175,7 +175,7 @@
                   </svg>
                 </div>
                 <p class="small text-muted mb-0">
-                  Lead → Opportunity → Quotation → Customer (στην ενότητα CRM).
+                  CRM: Lead → Opportunity → Quotation → Customer.
                 </p>
               </div>
             </div>
@@ -187,7 +187,7 @@
     <!-- Overview Cards -->
     <section id="overview" class="py-5">
       <div class="container">
-        <h2 class="h4 mb-4">Τι Καλύπτει το Demo</h2>
+        <h2 class="h4 mb-4">Demo Coverage</h2>
         <div class="row g-4">
           <div class="col-md-6 col-lg-3">
             <div class="card h-100 shadow-sm">
@@ -196,8 +196,8 @@
                   <i class="bi bi-gear-wide-connected"></i> Setup
                 </h5>
                 <p class="card-text">
-                  Δημιουργία site (π.χ. <code>farmamilk.local</code>), βασικές
-                  ρυθμίσεις.
+                  Site creation (e.g., <code>farmamilk.local</code>) and basic
+                  settings.
                 </p>
               </div>
             </div>
@@ -209,7 +209,7 @@
                   <i class="bi bi-upload"></i> Data Import
                 </h5>
                 <p class="card-text">
-                  Suppliers, Items (Raw/Pasteurized), Customers μέσω CSV.
+                  Suppliers, Items (Raw/Pasteurized), and Customers via CSV.
                 </p>
               </div>
             </div>
@@ -221,7 +221,7 @@
                   <i class="bi bi-box-seam"></i> Stock & Batches
                 </h5>
                 <p class="card-text">
-                  Ιχνηλασιμότητα γάλακτος με Batches για Raw/Pasteurized.
+                  Milk traceability using batches for Raw and Pasteurized items.
                 </p>
               </div>
             </div>
@@ -231,8 +231,8 @@
               <div class="card-body">
                 <h5 class="card-title"><i class="bi bi-people"></i> CRM</h5>
                 <p class="card-text">
-                  Lead → Opportunity → Quotation → Customer με κριτήρια
-                  αποδοχής.
+                  Lead → Opportunity → Quotation → Customer, with acceptance
+                  rules.
                 </p>
               </div>
             </div>
@@ -242,62 +242,112 @@
     </section>
 
     <!-- Gallery -->
-    <section id="gallery" class="py-5 bg-white border-top border-bottom">
-      <div class="container">
-        <div class="d-flex align-items-center justify-content-between mb-3">
-          <h2 class="h4 mb-0">Εικόνες Demo</h2>
-          <span class="text-muted small">Screenshots ERPNext</span>
+<section id="gallery" class="py-5 bg-white border-top border-bottom">
+  <div class="container">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <h2 class="h4 mb-0">Screenshots</h2>
+      <span class="text-muted small">ERPNext UI</span>
+    </div>
+    <div class="row g-3">
+      <div class="col-6 col-md-3">
+        <div class="ratio ratio-4x3 thumb">
+          <img
+            src="./screenshots erp/Home setup .png"
+            alt="Setup"
+            class="img-fluid rounded-3 gallery-img"
+            data-bs-toggle="modal"
+            data-bs-target="#imageModal"
+          />
         </div>
-        <div class="row g-3">
-          <div class="col-6 col-md-3">
-            <div class="ratio ratio-4x3 thumb">
-              <img
-                src="./screenshots erp/Home setup .png"
-                alt="Setup site"
-                class="img-fluid rounded-3"
-              />
-            </div>
-            <div class="small mt-2 text-center">Setup</div>
-          </div>
-          <div class="col-6 col-md-3">
-            <div class="ratio ratio-4x3 thumb">
-              <img
-                src="./screenshots erp/import data.png"
-                alt="Data Import"
-                class="img-fluid rounded-3"
-              />
-            </div>
-            <div class="small mt-2 text-center">Data Import</div>
-          </div>
-          <div class="col-6 col-md-3">
-            <div class="ratio ratio-4x3 thumb">
-              <img
-                src="./screenshots erp/Batch.png"
-                alt="Stock & Batches"
-                class="img-fluid rounded-3"
-              />
-            </div>
-            <div class="small mt-2 text-center">Stock & Batches</div>
-          </div>
-          <div class="col-6 col-md-3">
-            <div class="ratio ratio-4x3 thumb">
-              <img
-                src="./screenshots erp/CRM-FLOW.png"
-                alt="CRM Flow"
-                class="img-fluid rounded-3"
-              />
-            </div>
-            <div class="small mt-2 text-center">CRM Flow</div>
-          </div>
-        </div>
+        <div class="small mt-2 text-center">Setup</div>
       </div>
-    </section>
+      <div class="col-6 col-md-3">
+        <div class="ratio ratio-4x3 thumb">
+          <img
+            src="./screenshots erp/import data.png"
+            alt="Data Import"
+            class="img-fluid rounded-3 gallery-img"
+            data-bs-toggle="modal"
+            data-bs-target="#imageModal"
+          />
+        </div>
+        <div class="small mt-2 text-center">Data Import</div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="ratio ratio-4x3 thumb">
+          <img
+            src="./screenshots erp/Batch.png"
+            alt="Stock & Batches"
+            class="img-fluid rounded-3 gallery-img"
+            data-bs-toggle="modal"
+            data-bs-target="#imageModal"
+          />
+        </div>
+        <div class="small mt-2 text-center">Stock & Batches</div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="ratio ratio-4x3 thumb">
+          <img
+            src="./screenshots erp/CRM-FLOW.png"
+            alt="CRM Flow"
+            class="img-fluid rounded-3 gallery-img"
+            data-bs-toggle="modal"
+            data-bs-target="#imageModal"
+          />
+        </div>
+        <div class="small mt-2 text-center">CRM Flow</div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="ratio ratio-4x3 thumb">
+          <img
+            src="./screenshots erp/quality.png"
+            alt="Quality Inspection"
+            class="img-fluid rounded-3 gallery-img"
+            data-bs-toggle="modal"
+            data-bs-target="#imageModal"
+          />
+        </div>
+        <div class="small mt-2 text-center">Quality Inspection</div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="ratio ratio-4x3 thumb">
+          <img
+            src="./screenshots erp/bom.png"
+            alt="BOM"
+            class="img-fluid rounded-3 gallery-img"
+            data-bs-toggle="modal"
+            data-bs-target="#imageModal"
+          />
+        </div>
+        <div class="small mt-2 text-center">BOM</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal for gallery -->
+<div
+  class="modal fade"
+  id="imageModal"
+  tabindex="-1"
+  aria-labelledby="imageModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content bg-dark">
+      <div class="modal-body p-0">
+        <img src="" alt="" id="modalImage" class="img-fluid w-100 rounded-3" />
+      </div>
+    </div>
+  </div>
+</div>
 
     <!-- Data Tables -->
     <section id="data" class="py-5">
       <div class="container">
-        <h2 class="h4 mb-4">CSV Δεδομένα</h2>
+        <h2 class="h4 mb-4">CSV Data</h2>
 
+        <!-- Tabs -->
         <ul class="nav nav-pills mb-3" id="dataTabs" role="tablist">
           <li class="nav-item" role="presentation">
             <button
@@ -335,8 +385,33 @@
               CRM
             </button>
           </li>
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link"
+              id="bom-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#bom"
+              type="button"
+              role="tab"
+            >
+              BOM
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link"
+              id="quality-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#quality"
+              type="button"
+              role="tab"
+            >
+              Quality
+            </button>
+          </li>
         </ul>
 
+        <!-- Search -->
         <div class="d-flex gap-2 mb-3">
           <div class="input-group">
             <span class="input-group-text"><i class="bi bi-search"></i></span>
@@ -344,15 +419,15 @@
               id="searchInput"
               type="search"
               class="form-control"
-              placeholder="Αναζήτηση σε όλους τους πίνακες..."
+              placeholder="Search across all tables…"
             />
+            <button id="resetBtn" class="btn btn-outline-secondary">
+              <i class="bi bi-x-circle"></i> Clear
+            </button>
           </div>
-
-          <button id="resetBtn" class="btn btn-outline-secondary">
-            <i class="bi bi-x-circle"></i> Καθαρισμός
-          </button>
         </div>
 
+        <!-- Tab content -->
         <div class="tab-content" id="dataTabsContent">
           <div
             class="tab-pane fade show active"
@@ -373,7 +448,7 @@
                   </table>
                 </div>
                 <div class="small text-muted">
-                  Πηγή: <code>data/suppliers.csv</code>
+                  Source: <code>data/suppliers.csv</code>
                 </div>
               </div>
             </div>
@@ -398,7 +473,7 @@
                   </table>
                 </div>
                 <div class="small text-muted">
-                  Πηγή: <code>data/items.csv</code>
+                  Source: <code>data/items.csv</code>
                 </div>
               </div>
             </div>
@@ -425,7 +500,57 @@
                   </table>
                 </div>
                 <div class="small text-muted">
-                  Πηγή: <code>data/crm.csv</code>
+                  Source: <code>data/crm.csv</code>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="tab-pane fade"
+            id="bom"
+            role="tabpanel"
+            aria-labelledby="bom-tab"
+          >
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title mb-3">BOM</h5>
+                <div class="table-responsive">
+                  <table
+                    id="bomTable"
+                    class="table table-sm table-striped align-middle"
+                  >
+                    <thead></thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+                <div class="small text-muted">
+                  Source: <code>data/bom.csv</code>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="tab-pane fade"
+            id="quality"
+            role="tabpanel"
+            aria-labelledby="quality-tab"
+          >
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title mb-3">Quality</h5>
+                <div class="table-responsive">
+                  <table
+                    id="qualityTable"
+                    class="table table-sm table-striped align-middle"
+                  >
+                    <thead></thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+                <div class="small text-muted">
+                  Source: <code>data/quality.csv</code>
                 </div>
               </div>
             </div>
@@ -444,7 +569,8 @@
           with Bootstrap & PapaParse
         </div>
         <div class="small">
-          <i class="bi bi-github"></i> &copy; 2025 Evangelos Ntotsikas. All
+          <i class="bi bi-github"></i> &copy; 2025
+          <a href="https://github.com/vaggelis27">Evangelos Ntotsikas</a>. All
           rights reserved.
         </div>
       </div>

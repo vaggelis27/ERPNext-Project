@@ -1,0 +1,3 @@
+Quality Inspection Template Name,ID (Item Quality Inspection Parameter),Parameter (Item Quality Inspection Parameter),Maximum Value (Item Quality Inspection Parameter),Minimum Value (Item Quality Inspection Parameter),Numeric (Item Quality Inspection Parameter),Parameter Group (Item Quality Inspection Parameter)
+QC_RAW_MILK,13sr49svrc,pH,6.75,6.6,1,
+,13sd9qgfnb,Temperature,7,0,1,

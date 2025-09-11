@@ -43,3 +43,10 @@
 }
 
 /* Gallery */
+.gallery-img {
+  transition: transform 0.5s ease;
+}
+
+.gallery-img:hover {
+  transform: scale(1.05);
+}

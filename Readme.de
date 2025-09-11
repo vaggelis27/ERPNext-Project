@@ -1,0 +1,27 @@
+# ERPNext – Milk Cycle Demo
+
+This repository presents a portfolio demo simulating a milk supply chain cycle implemented in ERPNext and visualized with a static frontend.  
+It demonstrates Phase 1 (Setup, Master Data, CRM) and Phase 2 (Purchase Receipts, BOM, Quality).  
+The purpose is to show ERP workflows in a clear UI with CSV-backed tables and traceability.
+
+## Tech Stack
+
+- **Frontend:** [Bootstrap 5](https://getbootstrap.com/), [Bootstrap Icons](https://icons.getbootstrap.com/)  
+- **CSV Handling:** [PapaParse](https://www.papaparse.com/)  
+- **Languages & Tools:** HTML5, CSS3, Vanilla JavaScript  
+  - References: [W3Schools](https://www.w3schools.com/), [Stack Overflow](https://stackoverflow.com/), [Udemy Web Development Bootcamp by Angela Yu](https://www.udemy.com/course/the-complete-web-development-bootcamp/)  
+- **Hosting:** [GitHub Pages](https://pages.github.com/)
+
+## Data Files
+
+- `suppliers.csv` – Supplier master data  
+- `items.csv` – Item master data (Raw Milk, Pasteurized Milk)  
+- `crm.csv` – CRM workflow (Lead → Opportunity → Quotation → Customer)  
+- `purchase_receipts.csv` – Raw milk deliveries with FAT/SNF/pH  
+- `bom.csv` – Manufacturing Bill of Materials  
+- `quality.csv` – Quality inspections with acceptance/rejection rules  
+
+## Live Demo
+
+The project is available on GitHub Pages:  
+[https://vaggelis27.github.io/ERPNext-Project/](https://vaggelis27.github.io/ERPNext-Project/)

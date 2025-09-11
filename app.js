@@ -101,3 +101,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
+document.querySelectorAll(".gallery-img").forEach(function (img) {
+  img.addEventListener("click", function () {
+    var modalImg = document.getElementById("modalImage");
+    modalImg.src = this.getAttribute("src");
+    modalImg.alt = this.getAttribute("alt") || "Screenshot";
+  });
+});

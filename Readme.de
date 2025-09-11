@@ -15,7 +15,7 @@ The purpose is to show ERP workflows in a clear UI with CSV-backed tables and tr
 ## Data Files
 
 - `suppliers.csv` – Supplier master data  
-- `items.csv` – Item master data (Raw Milk, Pasteurized Milk)  
+- `items.csv` – Item import master data (Raw Milk, Pasteurized Milk)  
 - `crm.csv` – CRM workflow (Lead → Opportunity → Quotation → Customer)  
 - `purchase_receipts.csv` – Raw milk deliveries with FAT/SNF/pH  
 - `bom.csv` – Manufacturing Bill of Materials  

@@ -21,7 +21,3 @@ The purpose is to show ERP workflows in a clear UI with CSV-backed tables and tr
 - `bom.csv` – Manufacturing Bill of Materials  
 - `quality.csv` – Quality inspections with acceptance/rejection rules  
 
-## Live Demo
-
-The project is available on GitHub Pages:  
-[https://vaggelis27.github.io/ERPNext-Project/](https://vaggelis27.github.io/ERPNext-Project/)

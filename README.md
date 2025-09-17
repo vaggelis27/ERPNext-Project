@@ -32,10 +32,6 @@ The project is available on GitHub Pages:
 
 ---
 
-### Pitch
+### Project Overview
 
-**“This demo simulates a milk supply chain workflow in ERPNext.  
-I set up suppliers, items, and customers, then recorded purchase receipts with quality checks (FAT, SNF, pH).  
-Data flows through batches, CRM (Lead → Opportunity → Quotation → Customer), and a Bill of Materials for pasteurized milk.  
-The goal is to show end-to-end traceability, quality control, and integration of business processes, visualized through CSV data and a clean web UI.  
-Developed and tested in a Linux environment, showing strong ability to work with open-source ERP systems.”**
+I created a complete project in ERPNext that simulates the milk cycle, from raw material intake with quality checks (pH, FAT, SNF) to final customer delivery. The implementation integrates Procurement, Manufacturing (BOM), and CRM processes, demonstrating practical experience in ERP configuration in a Linux environment
